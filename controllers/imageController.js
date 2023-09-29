@@ -62,14 +62,12 @@ const imageController = {
 
     const { title, description } = req.body;
     const filename = req.file.filename;
-    const imagePath = path.join(filename); // Relative path to the uploaded image
+    const imagePath = path.join(filename);
 
-    // Save image metadata and filename to the database
     Image.createImage(
       { title, description, filename: imagePath },
       (err, data) => {
         if (err) {
-          // Handle database error
           return res.status(500).send({
             message: "An error occurred while saving image metadata.",
           });
